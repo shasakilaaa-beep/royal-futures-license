@@ -170,7 +170,9 @@ text-decoration:none;
 font-weight:800;
 font-size:13px;
 display:inline-block;
-transition:.25s
+transition:.25s;
+cursor:pointer;
+border:0
 }
 
 .primary{
@@ -371,6 +373,104 @@ color:#70e9bb;
 margin-right:8px
 }
 
+.order-btn{
+width:100%;
+text-align:center;
+margin-top:5px
+}
+
+/* ORDER MENU */
+.order-box{
+display:grid;
+grid-template-columns:1fr .8fr;
+gap:18px;
+align-items:stretch
+}
+
+.order-main{
+background:var(--panel);
+border:1px solid #9a72ff45;
+border-radius:25px;
+padding:30px;
+box-shadow:0 25px 80px #0006;
+backdrop-filter:blur(16px)
+}
+
+.order-main h3{
+font-size:28px;
+margin-bottom:8px
+}
+
+.order-main>p{
+color:var(--muted);
+line-height:1.7;
+font-size:14px
+}
+
+.selected-package{
+margin-top:25px;
+padding:20px;
+border:1px solid var(--line);
+background:#ffffff06;
+border-radius:18px
+}
+
+.selected-label{
+color:#8f95aa;
+font-size:11px;
+letter-spacing:1px
+}
+
+.selected-name{
+font-size:24px;
+font-weight:900;
+margin-top:8px
+}
+
+.selected-price{
+color:#b99eff;
+font-size:16px;
+margin-top:4px
+}
+
+.order-side{
+background:#0b0f1ddd;
+border:1px solid var(--line);
+border-radius:25px;
+padding:30px;
+display:flex;
+flex-direction:column;
+justify-content:center
+}
+
+.order-side h3{
+margin-bottom:10px
+}
+
+.order-side p{
+color:var(--muted);
+font-size:14px;
+line-height:1.7;
+margin-bottom:20px
+}
+
+.telegram-btn{
+width:100%;
+text-align:center;
+background:linear-gradient(110deg,#229ed9,#704bff);
+color:#fff;
+padding:15px 18px;
+border-radius:14px;
+text-decoration:none;
+font-weight:900;
+font-size:13px;
+transition:.25s
+}
+
+.telegram-btn:hover{
+transform:translateY(-4px)
+}
+
 .docgrid{
 display:grid;
 grid-template-columns:repeat(5,1fr);
@@ -472,6 +572,10 @@ grid-template-columns:repeat(2,1fr)
 grid-template-columns:repeat(3,1fr)
 }
 
+.order-box{
+grid-template-columns:1fr
+}
+
 nav a{
 display:none
 }
@@ -531,6 +635,7 @@ padding:72px 0
 <a href="#features">Features</a>
 <a href="#preview">Preview</a>
 <a href="#license">License</a>
+<a href="#order">Order</a>
 <a href="#documentation">Documentation</a>
 </div>
 </nav>
@@ -630,28 +735,21 @@ Preview antarmuka aplikasi yang dapat digunakan sebagai showcase produk.
 <div class="previews">
 
 <div class="card">
-
-<!-- FOTO LANGSUNG DARI ROOT REPOSITORY -->
 <img src="app-preview-01.jpeg" alt="App preview 01">
 
 <div class="cap">
 <span>INTERFACE / 01</span>
 <span>ROYAL FUTURES</span>
 </div>
-
 </div>
 
-
 <div class="card">
-
-<!-- FOTO LANGSUNG DARI ROOT REPOSITORY -->
 <img src="app-preview-02.jpeg" alt="App preview 02">
 
 <div class="cap">
 <span>INTERFACE / 02</span>
 <span>ROYAL FUTURES</span>
 </div>
-
 </div>
 
 </div>
@@ -679,6 +777,13 @@ Paket software digital berdasarkan masa aktif.
 <li>Activation support</li>
 <li>Basic access</li>
 </ul>
+
+<a
+href="#order"
+class="btn primary order-btn"
+onclick="choosePackage('STARTER','Rp100K','2 hari')">
+PILIH PAKET →
+</a>
 </div>
 
 
@@ -692,6 +797,13 @@ Paket software digital berdasarkan masa aktif.
 <li>Activation support</li>
 <li>Standard access</li>
 </ul>
+
+<a
+href="#order"
+class="btn primary order-btn"
+onclick="choosePackage('STANDARD','Rp250K','7 hari')">
+PILIH PAKET →
+</a>
 </div>
 
 
@@ -705,6 +817,13 @@ Paket software digital berdasarkan masa aktif.
 <li>Priority support</li>
 <li>Extended access</li>
 </ul>
+
+<a
+href="#order"
+class="btn primary order-btn"
+onclick="choosePackage('PRO','Rp500K','14 hari')">
+PILIH PAKET →
+</a>
 </div>
 
 
@@ -718,9 +837,82 @@ Paket software digital berdasarkan masa aktif.
 <li>Priority support</li>
 <li>Full license period</li>
 </ul>
+
+<a
+href="#order"
+class="btn primary order-btn"
+onclick="choosePackage('VIP','Rp1M','1 bulan')">
+PILIH PAKET →
+</a>
 </div>
 
 </div>
+</section>
+
+
+<!-- MENU PEMESANAN -->
+
+<section id="order">
+
+<div class="head">
+<h2>Menu Pemesanan</h2>
+<p>
+Konfirmasi paket yang dipilih sebelum menghubungi admin.
+</p>
+</div>
+
+<div class="order-box">
+
+<div class="order-main">
+
+<h3>Order Software</h3>
+
+<p>
+Paket yang kamu pilih akan ditampilkan otomatis di bawah ini.
+Kemudian kamu dapat melanjutkan komunikasi dengan admin melalui Telegram.
+</p>
+
+<div class="selected-package">
+
+<div class="selected-label">
+SELECTED LICENSE
+</div>
+
+<div class="selected-name" id="selectedPackage">
+Belum memilih paket
+</div>
+
+<div class="selected-price" id="selectedPrice">
+Silakan pilih paket dari menu License Plans.
+</div>
+
+</div>
+
+</div>
+
+
+<div class="order-side">
+
+<h3>Hubungi Admin</h3>
+
+<p>
+Klik tombol di bawah untuk membuka Telegram dan melanjutkan
+pemesanan software digital.
+</p>
+
+<a
+id="telegramOrder"
+class="telegram-btn"
+href="https://t.me/ProgrammerIT88"
+target="_blank"
+rel="noopener noreferrer">
+PESAN VIA TELEGRAM →
+</a>
+
+</div>
+
+</div>
+
 </section>
 
 
@@ -734,7 +926,6 @@ Dokumentasi visual yang kamu kirim, dibuat blur agar informasi
 pribadi dan data transaksi tidak terbaca.
 </p>
 </div>
-
 
 <div class="docgrid">
 
@@ -854,6 +1045,34 @@ dan bukan jaminan hasil atau keuntungan.
 </footer>
 
 </div>
+
+
+<script>
+function choosePackage(name,price,duration){
+
+document.getElementById("selectedPackage").textContent =
+name + " LICENSE";
+
+document.getElementById("selectedPrice").textContent =
+price + " · " + duration;
+
+const message =
+"Halo Admin, saya ingin memesan lisensi software ROYAL FUTURES.%0A%0A" +
+"Paket: " + encodeURIComponent(name) + "%0A" +
+"Harga: " + encodeURIComponent(price) + "%0A" +
+"Masa aktif: " + encodeURIComponent(duration);
+
+document.getElementById("telegramOrder").href =
+"https://t.me/ProgrammerIT88?text=" + message;
+
+setTimeout(function(){
+document.getElementById("order").scrollIntoView({
+behavior:"smooth"
+});
+},50);
+
+}
+</script>
 
 </body>
 </html>
